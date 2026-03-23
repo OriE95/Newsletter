@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ניוזלטר מחקר ממשלתי מס׳ 1 | מרץ 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Frank+Ruhl+Libre:wght@400;500;700;900&display=swap');
+
+    :root {
+      --bg:        #f2efe8;
+      --card:      #ffffff;
+      --navy:      #091e42;
+      --navy-mid:  #132f63;
+      --blue:      #0a51c8;
+      --blue-soft: #e8f0fd;
+      --teal:      #0c7a78;
+      --text:      #111827;
+      --sub:       #4b5566;
+      --muted:     #8492a6;
+      --border:    #e0dbd1;
+      --shadow:    0 2px 16px rgba(9,30,66,.07);
+      --shadow-h:  0 8px 40px rgba(9,30,66,.14);
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family: 'Heebo', 'Tahoma', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      direction: rtl;
+    }
+
+    /* ─────────────── HEADER ─────────────── */
+    .header {
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+      padding: 56px 48px 72px;
+    }
+
+    .header-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+
+    .header-blob1 {
+      position: absolute; top: -140px; left: -80px;
+      width: 520px; height: 520px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(10,81,200,.35) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .header-blob2 {
+      position: absolute; bottom: -120px; right: -60px;
+      width: 400px; height: 400px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(12,122,120,.3) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .header-inner {
+      position: relative; z-index: 1;
+      max-width: 1200px; margin: 0 auto;
+    }
+
+    .header-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.07);
+      color: #90b8f8; font-size: 11px; font-weight: 700;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 3px; margin-bottom: 22px;
+    }
+
+    .header-eyebrow .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #5cf0c0; animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity:1; transform:scale(1); }
+      50%      { opacity:.5; transform:scale(.7); }
+    }
+
+    .header h1 {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: clamp(30px, 4.5vw, 54px);
+      font-weight: 900; color: #fff;
+      line-height: 1.15; margin-bottom: 14px;
+    }
+
+    .header h1 em {
+      font-style: normal; color: #5bc8c8;
+    }
+
+    .header-desc {
+      color: #7da5d8; font-size: 14.5px;
+      line-height: 1.7; max-width: 580px;
+      margin-bottom: 44px;
+    }
+
+    .header-stats {
+      display: flex; gap: 0; flex-wrap: wrap;
+    }
+
+    .stat-item {
+      padding: 0 32px 0 0;
+      border-right: 1px solid rgba(255,255,255,.12);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-item:not(:first-child) { padding: 0 32px; }
+
+    .stat-num {
+      font-size: 32px; font-weight: 800; color: #fff;
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 11px; color: #5e88b5;
+      font-weight: 500; margin-top: 4px;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+
+    /* diagonal cut */
+    .header-cut {
+      position: absolute; bottom: -1px; left: 0; right: 0;
+      height: 40px; pointer-events: none;
+    }
+    .header-cut svg { width:100%; height:100%; display:block; }
+
+    /* ─────────────── FILTERS BAR ─────────────── */
+    .filters-bar {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 200;
+      box-shadow: 0 2px 12px rgba(0,0,0,.05);
+    }
+
+    .filters-inner {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .filters-row1 {
+      display: flex; align-items: center;
+      gap: 12px; padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .search-wrap {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      min-width: 220px; flex: 0 0 auto;
+      transition: border-color .2s;
+    }
+    .search-wrap:focus-within {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(10,81,200,.08);
+    }
+    .search-wrap svg { color: var(--muted); flex-shrink: 0; }
+    .search-wrap input {
+      border: none; background: transparent;
+      font-family: inherit; font-size: 13.5px;
+      color: var(--text); width: 100%;
+      direction: rtl; outline: none;
+    }
+    .search-wrap input::placeholder { color: var(--muted); }
+
+    .filter-label {
+      font-size: 11px; font-weight: 700; color: var(--muted);
+      letter-spacing: 1px; text-transform: uppercase;
+      white-space: nowrap; flex-shrink: 0;
+    }
+
+    .pills-wrap {
+      display: flex; gap: 6px; flex-wrap: wrap; align-items: center;
+    }
+
+    .pill {
+      padding: 5px 13px; border-radius: 20px;
+      font-size: 12px; font-weight: 600;
+      cursor: pointer; border: 1.5px solid var(--border);
+      background: transparent; color: var(--sub);
+      transition: all .18s ease; white-space: nowrap;
+      font-family: inherit;
+    }
+    .pill:hover { border-color: var(--blue); color: var(--blue); }
+    .pill.active { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .pill.pill-all.active { background: var(--navy); border-color: var(--navy); }
+
+    .filters-row2 {
+      display: flex; align-items: center;
+      gap: 12px; padding: 10px 0;
+      flex-wrap: wrap;
+    }
+
+    /* ─────────────── MAIN GRID ─────────────── */
+    .main {
+      max-width: 1200px; margin: 0 auto;
+      padding: 36px 48px 60px;
+    }
+
+    .results-line {
+      font-size: 13px; color: var(--muted);
+      margin-bottom: 24px; font-weight: 500;
+    }
+    .results-line strong { color: var(--text); }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 22px;
+    }
+
+    /* ─────────────── CARD ─────────────── */
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 26px 28px 24px;
+      display: flex; flex-direction: column; gap: 14px;
+      transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+      position: relative; overflow: hidden;
+      animation: fadeUp .4s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(16px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    .card:nth-child(2)  { animation-delay:.05s; }
+    .card:nth-child(3)  { animation-delay:.10s; }
+    .card:nth-child(4)  { animation-delay:.15s; }
+    .card:nth-child(5)  { animation-delay:.20s; }
+    .card:nth-child(6)  { animation-delay:.25s; }
+    .card:nth-child(7)  { animation-delay:.30s; }
+    .card:nth-child(8)  { animation-delay:.35s; }
+    .card:nth-child(9)  { animation-delay:.40s; }
+
+    .card::after {
+      content: '';
+      position: absolute; top: 0; right: 0;
+      width: 4px; height: 100%;
+      background: var(--accent, var(--blue));
+      border-radius: 0 12px 12px 0;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-h);
+      border-color: transparent;
+    }
+
+    .card-top {
+      display: flex; justify-content: space-between;
+      align-items: flex-start; gap: 10px;
+    }
+
+    .cat-badge {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: .8px; text-transform: uppercase;
+      padding: 3px 9px; border-radius: 3px;
+      white-space: nowrap; flex-shrink: 0;
+    }
+
+    .org-tag {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 11.5px; font-weight: 600; color: var(--sub);
+      text-align: left;
+    }
+    .org-tag .odot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent, var(--blue)); flex-shrink: 0;
+    }
+
+    .card h3 {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 17px; font-weight: 700;
+      line-height: 1.4; color: var(--text);
+    }
+
+    .card-summary {
+      font-size: 13.5px; line-height: 1.72;
+      color: var(--sub); flex: 1;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      transition: all .3s ease;
+    }
+
+    .card-summary.expanded {
+      -webkit-line-clamp: unset;
+      display: block;
+    }
+
+    .toggle-btn {
+      background: none; border: none;
+      color: var(--blue); font-size: 12px; font-weight: 600;
+      cursor: pointer; font-family: inherit;
+      padding: 0; margin-top: -6px;
+      display: inline-flex; align-items: center; gap: 4px;
+    }
+    .toggle-btn:hover { text-decoration: underline; }
+
+    .card-footer {
+      margin-top: auto;
+    }
+
+    .read-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--navy); color: #fff;
+      text-decoration: none;
+      padding: 9px 18px; border-radius: 7px;
+      font-size: 13px; font-weight: 600;
+      font-family: inherit;
+      transition: background .2s, transform .2s;
+    }
+    .read-btn:hover {
+      background: var(--blue);
+      transform: translateX(-3px);
+    }
+    .read-btn svg { transform: scaleX(-1); }
+
+    /* empty state */
+    .empty-state {
+      grid-column: 1/-1;
+      text-align: center; padding: 80px 20px;
+    }
+    .empty-state .empty-icon {
+      font-size: 48px; margin-bottom: 16px;
+    }
+    .empty-state h3 {
+      font-size: 20px; color: var(--text);
+      margin-bottom: 8px;
+    }
+    .empty-state p { color: var(--muted); font-size: 14px; }
+
+    /* ─────────────── FOOTER ─────────────── */
+    footer {
+      background: var(--navy); color: #4a6a9a;
+      text-align: center; padding: 36px 48px;
+      font-size: 13px; margin-top: 20px;
+    }
+    footer strong { color: #7aa8d8; }
+
+    /* ─────────────── RESPONSIVE ─────────────── */
+    @media (max-width: 860px) {
+      .header { padding: 40px 24px 60px; }
+      .filters-inner { padding: 0 24px; }
+      .main { padding: 28px 24px 48px; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .stat-item { padding: 0 20px 0 0; }
+      .stat-item:not(:first-child) { padding: 0 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ HEADER ═══════════════════════════ -->
+<header class="header">
+  <div class="header-grid"></div>
+  <div class="header-blob1"></div>
+  <div class="header-blob2"></div>
+  <div class="header-inner">
+    <div class="header-eyebrow">
+      <span class="dot"></span>
+      מחקר ממשלתי · גיליון מס׳ 1
+    </div>
+    <h1>לקט פרסומים נבחרים<br><em>בכלכלת ישראל 2025</em></h1>
+    <p class="header-desc">
+      סיכום פרסומים מהשנה החולפת מאת גופים ממשלתיים וסטטוטוריים — בנק ישראל, רשות החדשנות,
+      הכנסת, משרד האוצר ועוד. מרץ 2026.
+    </p>
+    <div class="header-stats">
+      <div class="stat-item">
+        <div class="stat-num" id="total-count">19</div>
+        <div class="stat-label">מחקרים</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">9</div>
+        <div class="stat-label">גופים</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">10</div>
+        <div class="stat-label">תחומים</div>
+      </div>
+    </div>
+  </div>
+  <div class="header-cut">
+    <svg viewBox="0 0 1440 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 L1440,40 L1440,40 L0,40 Z" fill="#f2efe8"/>
+    </svg>
+  </div>
+</header>
+
+<!-- ═══════════════════════════ FILTERS ═══════════════════════════ -->
+<div class="filters-bar">
+  <div class="filters-inner">
+    <div class="filters-row1">
+      <div class="search-wrap">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="text" id="search-input" placeholder="חיפוש לפי כותרת, ארגון או תוכן…" oninput="applyFilters()"/>
+      </div>
+      <span class="filter-label">קטגוריה:</span>
+      <div class="pills-wrap" id="cat-pills"></div>
+    </div>
+    <div class="filters-row2">
+      <span class="filter-label">גוף פרסום:</span>
+      <div class="pills-wrap" id="org-pills"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ MAIN ═══════════════════════════ -->
+<main class="main">
+  <div class="results-line" id="results-line">מציג <strong id="shown-count">19</strong> מחקרים</div>
+  <div class="cards-grid" id="cards-grid"></div>
+</main>
+
+<!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+<footer>
+  <strong>ניוזלטר מחקר ממשלתי</strong> · גיליון מס׳ 1 · מרץ 2026<br>
+  לקט פרסומים מגופים ממשלתיים וסטטוטוריים בכלכלת ישראל · 2025
+</footer>
+
+<script>
+  /* ─── DATA ─── */
+  const articles = [
+    {
+      title: "ביטחון תזונתי 2024",
+      org: "ביטוח לאומי", orgKey: "btl",
+      category: "רווחה חברתית", catKey: "welfare",
+      summary: "למרות שיפור מסוים ב-2024, כ-27% ממשקי הבית (2.8 מיליון נפשות, מתוכן מיליון ילדים) עדיין סובלים מאי-ביטחון תזונתי על רקע כלכלי. במקביל, שיעור זהה של 27% חסר נגישות כלכלית למזון בריא, מה שמעיד על קושי נרחב בשמירה על תזונה בטוחה ומזינה בישראל. אי-בטחון תזונתי נפוץ במיוחד במגזר הערבי (58%) ובמחוזות צפון וירושלים (37%). בקרב חרדים, כ-25% ממשקי הבית חיים באי-בטחון תזונתי ובקרב בני 65 ומעלה השיעור עומד על 23%.",
+      link: "https://www.btl.gov.il/Publications/research/Documents/bitahon2024.pdf"
+    },
+    {
+      title: "דו\"ח שנתי מצב ההיי-טק 2025",
+      org: "רשות החדשנות", orgKey: "innovation",
+      category: "הייטק וחדשנות", catKey: "hitech",
+      summary: "תמונת המצב העולה מהדו\"ח השנתי של רשות החדשנות משקפת חוסן ועמידות של ענף ההייטק מול האתגרים המתמשכים. ההייטק הישראלי מציג ניצני התאוששות וצמיחה בחלק מהמדדים, כמו גיוסי הון, אקזיטים וחלקו בייצוא, אך שרוי בקיפאון מתמשך במדדים מרכזיים אחרים כמו תוצר ההייטק והתעסוקה בו.",
+      link: "https://innovationisrael.org.il/report/the-state-of-high-tech-2025/"
+    },
+    {
+      title: "השפעת כניסות של מותגים פרטיים על מחירי צרכן בישראל",
+      org: "רשות התחרות", orgKey: "competition",
+      category: "תחרות ומחירים", catKey: "prices",
+      summary: "המחקר בוחן את השפעת כניסתם של מותגים פרטיים ברשתות שופרסל וברמי לוי על מחירים, תוך שימוש בנתוני מכירות מפורטים בשיטת הפרש ההפרשים. להשקת מותגים פרטיים השפעות מעורבות: ברבות מתת-הקטגוריות מחירי המוצרים הממותגים דווקא עלו — תוצאה המוסברת בבידול מוצרים ובאסטרטגיות תמחור של הקמעונאים. לעומת זאת, המחיר הממוצע הכולל לרוב ירד, משום שמחירי המותג הפרטי נמוכים משמעותית. בנוסף, כניסות מותגים פרטיים הפחיתו את ריכוזיות הספקים ברוב השווקים.",
+      link: "https://www.gov.il/BlobFolder/reports/privatebrands-research/he/decisions_%D7%94%D7%A9%D7%A4%D7%A2%D7%AA%20%D7%9B%D7%A0%D7%99%D7%A1%D7%95%D7%AA%20%D7%A9%D7%9C%20%D7%9E%D7%95%D7%AA%D7%92%D7%99%D7%9D%20%D7%A4%D7%A8%D7%98%D7%99%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%9E%D7%97%D7%99%D7%A8%D7%99%20%D7%A6%D7%A8%D7%9B%D7%9F%20%D7%91%D7%99%D7%A9%D7%A8%D7%90%D7%9C.pdf"
+    },
+    {
+      title: "שיעורם של עסקים קטנים ובינוניים בתעסוקה, באשראי ובתוצר",
+      org: "ממ\"מ (מרכז המחקר והמידע של הכנסת)", orgKey: "mmm",
+      category: "עסקים קטנים ובינוניים", catKey: "sme",
+      summary: "על אף שחלקם של עסקים קטנים בתוצר העסקי מהווה כ-55%, חלקם באשראי הבנקאי נמוך משמעותית – כ-26% בלבד – ומתקיים 'פער פיננסי' בין תרומתם לכלכלה לבין היקף האשראי הניתן להם. שיעור האשראי לעסקים קטנים מסך האשראי הבנקאי העסקי אף ירד בחדות בשנים האחרונות. שיעורי הריבית על אשראי בנקאי לעסקים קטנים וזעירים גבוהים משמעותית מאשר לעסקים גדולים.",
+      link: "https://fs.knesset.gov.il/globaldocs/MMM/51fb27d8-dddf-f011-a866-005056aa9911/2_51fb27d8-dddf-f011-a866-005056aa9911_11_21353.pdf"
+    },
+    {
+      title: "משק האנרגיה – סקירה כלכלית",
+      org: "ממ\"מ (מרכז המחקר והמידע של הכנסת)", orgKey: "mmm",
+      category: "אנרגיה", catKey: "energy",
+      summary: "הפקת הגז הטבעי ממשיכה להיות אחד ממנועי האנרגיה המרכזיים של ישראל, אך היא חשופה לשיבושים נקודתיים המשפיעים על היקפי ההפקה בפועל. ייצור החשמל בישראל מתרחב בהתמדה, כשגז טבעי מחליף בהדרגה את הפחם, ואילו האנרגיות המתחדשות צומחות אך עדיין אינן עומדות ביעדים שנקבעו. קיימים אתגרי תחרות בשוק הגז, מגבלות תשתית, שאלת אחסון גז, והצורך להיערך לעתיד שבו הביקוש לחשמל ימשיך לעלות.",
+      link: "https://fs.knesset.gov.il/globaldocs/MMM/56700002-c4ce-f011-a865-005056aa9911/2_56700002-c4ce-f011-a865-005056aa9911_11_21308.pdf"
+    },
+    {
+      title: "תיאור וניתוח העלאת תקרת הפטור ממיסים ביבוא אישי",
+      org: "ממ\"מ (מרכז המחקר והמידע של הכנסת)", orgKey: "mmm",
+      category: "מיסוי ומסחר", catKey: "tax",
+      summary: "העלאת הפטור תגרום לאובדן הכנסות מדינה של מיליארד ש\"ח ותפגע בעסקים מקומיים, אך תוזיל מחירים לצרכן ותגביר את התחרות בקמעונאות. המהלך יחזק את פעילות חברות השילוח והלוגיסטיקה, תוך יצירת מודל פטור הדומה לנהוג בחלק ממדינות ה-OECD עבור ספקים קטנים.",
+      link: "https://fs.knesset.gov.il/globaldocs/MMM/a9f5e4ea-ee00-f111-a13e-005056aa7c52/2_a9f5e4ea-ee00-f111-a13e-005056aa7c52_11_21426.pdf"
+    },
+    {
+      title: "הגדלת ההון האנושי בענף ההייטק בדגש על גיוונו",
+      org: "ממ\"מ (מרכז המחקר והמידע של הכנסת)", orgKey: "mmm",
+      category: "הייטק וחדשנות", catKey: "hitech",
+      summary: "מדינת ישראל מנסה להרחיב ולהעמיק את בסיס ההון האנושי בענף ההייטק, תוך התמודדות עם מחסור בכוח אדם מיומן וצורך בגיוון רחב יותר של עובדים. ההייטק הפך למנוע צמיחה מרכזי, אך גם למקור לפערים חברתיים, שכן השתתפות בקבוצות מסוימות – נשים, ערבים, חרדים ותושבי פריפריה – עדיין נמוכה. המדינה פועלת באמצעות תוכניות לאומיות, הרחבת לימודי מדעים וטכנולוגיה ויישום המלצות ועדות מקצועיות.",
+      link: "https://fs.knesset.gov.il/globaldocs/MMM/e16308cb-47de-ef11-a856-005056aa9911/2_e16308cb-47de-ef11-a856-005056aa9911_11_20956.pdf"
+    },
+    {
+      title: "הרכב ההון האנושי ופרמיית השכר במגזר ההייטק בישראל",
+      org: "הכלכלן הראשי, משרד האוצר", orgKey: "chief",
+      category: "הייטק וחדשנות", catKey: "hitech",
+      summary: "ההייטק הישראלי מושך אליו עובדים מיומנים ומציע רמות שכר גבוהות במיוחד. הסקירה מתארת כלכלה דואלית: מגזר הייטק דינמי ומתפתח מול שאר המשק. המחקר בוחן כיצד מיומנויות העובדים, מבנה החברות והתרחבות 'חברות העל' מעצבים את השוק, ומראה כי העלייה בפערי השכר נובעת פחות מיכולות העובדים ויותר מכך שההייטק מרוכז בחברות גדולות ובעלות פריון גבוה.",
+      link: "https://www.gov.il/BlobFolder/reports/review-10122025-main/he/reviews-and-publishes_review-10122025.pdf"
+    },
+    {
+      title: "על בעיית המחסור בעובדים במשק",
+      org: "הכלכלן הראשי, משרד האוצר", orgKey: "chief",
+      category: "שוק העבודה", catKey: "labor",
+      summary: "לאחר היציאה ממשבר הקורונה נרשמה התאוששות מלאה של התעסוקה וחזרה למגמה ארוכת הטווח; מהלך המלחמה נרשמה ירידה בתעסוקה מתחת למגמה, בעיקר בעקבות יציאה משמעותית של מועסקים פלסטינים משוק העבודה.",
+      link: "https://www.gov.il/BlobFolder/reports/review-02122025-main/he/reviews-and-publishes_review-02122025.pdf"
+    },
+    {
+      title: "על הירידה בהשתתפות הצעירים בשוק העבודה",
+      org: "הכלכלן הראשי, משרד האוצר", orgKey: "chief",
+      category: "שוק העבודה", catKey: "labor",
+      summary: "בעשור האחרון מתגלה מגמה של ירידה בשיעור השתתפות הצעירים בשוק העבודה. בעוד שבקרב קבוצות הגיל המבוגרות יותר שיעורי ההשתתפות ממשיכים לעלות, בקרב גילאי 18–34 נרשמת נסיגה עקבית. המגמה אינה מוסברת בעלייה בלימודים אקדמיים או מקצועיים. הירידה בולטת במיוחד בקרב גברים ערבים וגברים חרדים, ומדגישה את הצורך במדיניות שתחזק מיומנויות ותמריצים להשתלבות מוקדמת.",
+      link: "https://www.gov.il/BlobFolder/reports/review-21042025/he/reviews-and-publishes_review-21042025.pdf"
+    },
+    {
+      title: "OECD Economic Surveys: Israel 2025",
+      org: "OECD", orgKey: "oecd",
+      category: "כלכלה כללית", catKey: "economy",
+      summary: "כלכלת ישראל הציגה חוסן משמעותי בזכות יסודות פיננסיים איתנים ומגזר הי-טק חזק, אך המשך הצמיחה דורש ריסון פיסקאלי והפחתת אינפלציה. האצת הפריון והורדת יוקר המחיה תלויות ברפורמות בחינוך, שילוב אוכלוסיות בתעסוקה, הסרת חסמי סחר, קידום תחום ה-AI ומעבר לאנרגיה ירוקה.",
+      link: "https://www.oecd.org/content/dam/oecd/en/publications/reports/2025/04/oecd-economic-surveys-israel-2025_18e45b04/d6dd02bc-en.pdf"
+    },
+    {
+      title: "תעסוקת נשים מעל גיל 50 בישראל",
+      org: "משרד העבודה", orgKey: "labor_ministry",
+      category: "שוק העבודה", catKey: "labor",
+      summary: "המחקר בוחן את תעסוקת נשים בישראל מגיל 50 ומעלה ואת הגורמים המשפיעים על יציאתן משוק העבודה בתקופה שבה עולה גיל הפרישה. נמצא כי שיעורי התעסוקה גבוהים בשנות ה-40 וה-50 אך יורדים בהדרגה מגיל 52 ובצורה דרמטית לאחר גיל 62. נשים רבות מרוכזות במקצועות טיפול וחינוך המאופיינים בשכר נמוך ושחיקה פיזית ונפשית. המחקר מדגיש את הצורך בתמיכה תעסוקתית, גמישות, הכשרות והתאמות.",
+      link: "https://www.gov.il/BlobFolder/dynamiccollectorresultitem/employment-women-50plus/he/strategy_research_employment-women-50plus.pdf"
+    },
+    {
+      title: "השפעת לימודי הנדסאות במה\"ט על ניידות בין-דורית",
+      org: "משרד העבודה", orgKey: "labor_ministry",
+      category: "חינוך ותעסוקה", catKey: "education",
+      summary: "המאמר בוחן את תרומת לימודי ההנדסאות במכללות הטכנולוגיות (מה\"ט) לניידות בין-דורית בישראל. נמצא כי בוגרי מה\"ט מגיעים מרקע סוציואקונומי חלש יותר לעומת בוגרי האקדמיה, אך מצליחים לשפר את מצבם הכלכלי באופן ניכר, עם עלייה של כ-9 נקודות בדירוג ההכנסות. מה\"ט מתבלטת בנגישות גבוהה לאוכלוסיות מוחלשות ובהזדמנות ממשית להגיע למעמד בינוני-גבוה.",
+      link: "https://www.gov.il/BlobFolder/dynamiccollectorresultitem/mahat-engineering-intergenerational-mobility/he/mahat_mahat-engineering-intergenerational-mobility-file.pdf"
+    },
+    {
+      title: "קשיחות וסנכרון: ניתוח דינמיקת מחירים בחנויות מקוונות ופיזיות",
+      org: "בנק ישראל", orgKey: "boi",
+      category: "תחרות ומחירים", catKey: "prices",
+      summary: "המחקר מנתח נתוני פאנל של מחירים יומיים בחנויות מקוונות ופיזיות של רשתות מזון בישראל. נמצא כי מחירים מקוונים משתנים בתדירות גבוהה יותר, אך רק ב-6.2% בממוצע. המחירים דומים מאוד בתוך רשתות, אך שונים משמעותית בין רשתות. נמצא מתאם חיובי בין אינפלציה לבין סנכרון שינויי המחירים, מה שמצביע על פוטנציאל ל'שרשראות תמחור' המגבירות לחצים אינפלציוניים.",
+      link: "https://www.boi.org.il/media/0ucho0wz/dp202510h.pdf"
+    },
+    {
+      title: "התפתחויות בשכר ובתעסוקה של רופאים בישראל בעקבות הסכם שכר 2011",
+      org: "בנק ישראל", orgKey: "boi",
+      category: "שוק העבודה", catKey: "labor",
+      summary: "המאמר בוחן את השפעת הסכם השכר של רופאים מ-2011, שכלל תמריצים משמעותיים למעבר לפריפריה ולעידוד התמחות בתחומים במצוקה. הממצאים מצביעים כי התמריצים הכלכליים לא השפיעו כמעט על החלטת רופאים מומחים לגור בפריפריה. לעומת זאת, גורם משמעותי שכן מנבא עבודה בפריפריה הוא חשיפה מוקדמת – מגורים או לימודים בפריפריה לפני בחירת ההתמחות.",
+      link: "https://www.boi.org.il/media/jajn2v0q/dp202501hn.pdf"
+    },
+    {
+      title: "השפעת הטבות המס ליישובים על דפוסי ההגירה הפנימית",
+      org: "בנק ישראל", orgKey: "boi",
+      category: "גיאוגרפיה כלכלית", catKey: "geo",
+      summary: "הרפורמה בהטבות המס האזוריות בישראל בשנת 2016 שהכפילה את מספר היישובים הזכאים, הובילה לעלייה של כ-32% בהגירה הנכנסת ליישובים החדשים, ובכך שיפרה משמעותית את ההגירה נטו. הרכב המהגרים השתנה לטובת משקי בית בעלי הכנסה גבוהה יותר. ההשפעות היו הטרוגניות: יישובים יהודיים קטנים ובמחוזות הדרום ויהודה ושומרון נהנו מהשפעה בולטת.",
+      link: "https://www.boi.org.il/media/t01dqlyk/dp202502h.pdf"
+    },
+    {
+      title: "השפעות חינוך חינם לגילאי 3-4 בטווח הקצר והארוך: ממצאים מהאוכלוסייה הערבית בישראל",
+      org: "בנק ישראל", orgKey: "boi",
+      category: "חינוך ותעסוקה", catKey: "education",
+      summary: "חוק חינוך חובה חינם לגילאי 3–4 יושם החל מ-1999 בעיקר ביישובים ערביים. החוק נמצא כמעלה משמעותית את שיעורי הרישום לגנים ואת ההישגים הלימודיים לאורך כל שלבי החינוך: שיפור במיצ\"ב, עלייה בזכאות לבגרות, וגידול ברישום והשגה בהשכלה על-תיכונית. נמצאו גם ירידה בעבריינות נוער בקרב בנים וצמצום נישואין מוקדמים בקרב בנות.",
+      link: "https://www.boi.org.il/media/wxnlrap5/dp202602e.pdf"
+    },
+    {
+      title: "הקשר בין עבודה במגזר הציבורי והרצון להחליף עבודה — עדויות מישראל",
+      org: "בנק ישראל", orgKey: "boi",
+      category: "שוק העבודה", catKey: "labor",
+      summary: "8% מהעובדים בישראל מבקשים להחליף מקום עבודה, אך שיעור זה נמוך בכ-30% בקרב מועסקים במגזר הציבורי לעומת המגזר העסקי. כשליש מהפער מוסבר בתכונות עובדים ובהתאמה סובייקטיבית גבוהה יותר בין הכשרה לתפקיד במגזר הציבורי. הפער בולט במיוחד אצל עובדים המדווחים על חוסר התאמה מקצועית, ובקרב נשים עם ילדים.",
+      link: "https://www.boi.org.il/media/sopjg1ub/%D7%9E%D7%97%D7%A7%D7%A8-%D7%94%D7%A7%D7%A9%D7%A8-%D7%91%D7%99%D7%9F-%D7%A2%D7%91%D7%95%D7%93%D7%94-%D7%91%D7%9E%D7%92%D7%96%D7%A8-%D7%94%D7%A6%D7%99%D7%91%D7%95%D7%A8%D7%99-%D7%95%D7%94%D7%A8%D7%A6%D7%95%D7%9F-%D7%9C%D7%94%D7%97%D7%9C%D7%99%D7%A3-%D7%A2%D7%91%D7%95%D7%93%D7%94-%D7%A2%D7%93%D7%95%D7%99%D7%95%D7%AA-%D7%9E%D7%99%D7%A9%D7%A8%D7%90%D7%9C.pdf"
+    },
+    {
+      title: "עלות-תועלת לחדירת רכב חשמלי פרטי לישראל בעשור הקרוב (עד שנת 2034)",
+      org: "המועצה הלאומית לכלכלה", orgKey: "council",
+      category: "אנרגיה", catKey: "energy",
+      summary: "המסמך מנתח את הכדאיות הכלכלית של חדירת רכב חשמלי פרטי לישראל בעשור הקרוב. כיום רכב חשמלי עדיין יקר יותר למשק מרכב בנזין, בעיקר בשל עלות רכישה גבוהה, אך עולה לצרכן פחות בגלל מבנה המס. החל משנת 2034 צפויה עלות הרכב החשמלי לרדת, כך שהכדאיות למשק תהפוך חיובית. עיקר התועלת נובע מהפחתת פליטות מזהמים וגזי חממה.",
+      link: "https://www.gov.il/BlobFolder/news/electric-car290125/he/file_car290125.pdf"
+    }
+  ];
+
+  /* ─── LOOK-UPS ─── */
+  const catStyles = {
+    welfare:   { label: "רווחה חברתית",        bg: "#fef2f2", fg: "#b91c1c" },
+    hitech:    { label: "הייטק וחדשנות",        bg: "#eff6ff", fg: "#1d4ed8" },
+    prices:    { label: "תחרות ומחירים",         bg: "#fff7ed", fg: "#c2410c" },
+    sme:       { label: "עסקים קטנים ובינוניים", bg: "#f0fdf4", fg: "#15803d" },
+    energy:    { label: "אנרגיה",               bg: "#f0f9ff", fg: "#0369a1" },
+    tax:       { label: "מיסוי ומסחר",          bg: "#faf5ff", fg: "#7c3aed" },
+    labor:     { label: "שוק העבודה",            bg: "#f8fafc", fg: "#334155" },
+    education: { label: "חינוך ותעסוקה",         bg: "#fefce8", fg: "#854d0e" },
+    economy:   { label: "כלכלה כללית",           bg: "#eef2ff", fg: "#4338ca" },
+    geo:       { label: "גיאוגרפיה כלכלית",     bg: "#ecfdf5", fg: "#065f46" }
+  };
+
+  const orgStyles = {
+    btl:           { accent: "#1565C0" },
+    innovation:    { accent: "#00838F" },
+    competition:   { accent: "#E65100" },
+    mmm:           { accent: "#6A0DAD" },
+    chief:         { accent: "#1B5E20" },
+    oecd:          { accent: "#01579B" },
+    labor_ministry:{ accent: "#BF360C" },
+    boi:           { accent: "#004D40" },
+    council:       { accent: "#455A64" }
+  };
+
+  /* ─── FILTER STATE ─── */
+  let activeCat = 'all';
+  let activeOrg = 'all';
+
+  /* ─── BUILD PILLS ─── */
+  function buildPills() {
+    const catContainer = document.getElementById('cat-pills');
+    const orgContainer = document.getElementById('org-pills');
+
+    // All category pill
+    catContainer.innerHTML = `<button class="pill pill-all active" onclick="setCat('all', this)">הכל</button>`;
+    const cats = [...new Set(articles.map(a => a.catKey))];
+    cats.forEach(ck => {
+      const s = catStyles[ck];
+      const btn = document.createElement('button');
+      btn.className = 'pill';
+      btn.textContent = s.label;
+      btn.onclick = () => setCat(ck, btn);
+      catContainer.appendChild(btn);
+    });
+
+    // All org pill
+    orgContainer.innerHTML = `<button class="pill pill-all active" onclick="setOrg('all', this)">כל הגופים</button>`;
+    const orgs = [...new Map(articles.map(a => [a.orgKey, a.org])).entries()];
+    orgs.forEach(([ok, name]) => {
+      const btn = document.createElement('button');
+      btn.className = 'pill';
+      btn.textContent = name.replace(' (מרכז המחקר והמידע של הכנסת)', '');
+      btn.onclick = () => setOrg(ok, btn);
+      orgContainer.appendChild(btn);
+    });
+  }
+
+  function setCat(key, el) {
+    activeCat = key;
+    document.querySelectorAll('#cat-pills .pill').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    applyFilters();
+  }
+
+  function setOrg(key, el) {
+    activeOrg = key;
+    document.querySelectorAll('#org-pills .pill').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    applyFilters();
+  }
+
+  /* ─── FILTER & RENDER ─── */
+  function applyFilters() {
+    const q = document.getElementById('search-input').value.trim().toLowerCase();
+
+    const filtered = articles.filter(a => {
+      const matchCat = activeCat === 'all' || a.catKey === activeCat;
+      const matchOrg = activeOrg === 'all' || a.orgKey === activeOrg;
+      const matchQ   = !q ||
+        a.title.toLowerCase().includes(q) ||
+        a.org.toLowerCase().includes(q) ||
+        a.summary.toLowerCase().includes(q) ||
+        a.category.toLowerCase().includes(q);
+      return matchCat && matchOrg && matchQ;
+    });
+
+    document.getElementById('shown-count').textContent = filtered.length;
+    renderCards(filtered);
+  }
+
+  /* ─── RENDER ─── */
+  function renderCards(list) {
+    const grid = document.getElementById('cards-grid');
+    if (list.length === 0) {
+      grid.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-icon">🔍</div>
+          <h3>לא נמצאו מחקרים</h3>
+          <p>נסה לשנות את מסנני החיפוש</p>
+        </div>`;
+      return;
+    }
+
+    grid.innerHTML = list.map((a, i) => {
+      const cs = catStyles[a.catKey] || { label: a.category, bg: '#f3f4f6', fg: '#374151' };
+      const os = orgStyles[a.orgKey] || { accent: '#0a51c8' };
+      const delay = Math.min(i * 0.05, 0.4);
+
+      return `
+      <article class="card" style="--accent:${os.accent}; animation-delay:${delay}s">
+        <div class="card-top">
+          <span class="cat-badge" style="background:${cs.bg};color:${cs.fg}">${cs.label}</span>
+          <div class="org-tag">
+            <span class="odot" style="background:${os.accent}"></span>
+            <span>${a.org.replace(' (מרכז המחקר והמידע של הכנסת)', '')}</span>
+          </div>
+        </div>
+        <h3>${a.title}</h3>
+        <p class="card-summary collapsed" id="summary-${i}">${a.summary}</p>
+        <button class="toggle-btn" id="toggle-${i}" onclick="toggleSummary(${i})">
+          קרא עוד ›
+        </button>
+        <div class="card-footer">
+          <a class="read-btn" href="${a.link}" target="_blank" rel="noopener">
+            לקריאת המחקר המלא
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+        </div>
+      </article>`;
+    }).join('');
+  }
+
+  function toggleSummary(i) {
+    const p   = document.getElementById(`summary-${i}`);
+    const btn = document.getElementById(`toggle-${i}`);
+    const exp = p.classList.toggle('expanded');
+    btn.textContent = exp ? 'הצג פחות ‹' : 'קרא עוד ›';
+  }
+
+  /* ─── INIT ─── */
+  buildPills();
+  renderCards(articles);
+</script>
+</body>
+</html>
